@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO-AI-GCC Dashboards Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #232F3E;
+            --secondary-color: #FF9900;
+            --accent-color: #37475A;
+            --gradient-start: #232F3E;
+            --gradient-end: #37475A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Amazon Ember', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .search-box {
+            margin: 0 auto 30px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        #searchInput::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            border-color: var(--secondaryary-color);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .dashboard-card a {
+            text-decoration: none;
+            color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dashboard-card h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .access-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border-radius: 25px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .access-btn:hover {
+            background: #ffac31;
+            transform: translateY(-2px);
+        }
+
+        .dashboard-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Custom animation for cards */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-card {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .dashboard-card:nth-child(n) {
+            animation-delay: calc(n * 0.1s);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GO-AI-GCC Dashboards Hub</h1>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search dashboards..." onkeyup="searchDashboards()">
+        </div>
+        <div class="dashboard-grid">
+            <!-- Dashboard cards with same content as before -->
+            <div class="dashboard-card">
+                <a href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/fa8c6138-6800-4b7b-b9e2-7b40b6c3e2f2/views/a71f5adc-8f2c-444a-8ffd-813829f6e0ed?directory_alias=amazonbi">
+                    <h2>Apeth Performance Dashboard</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/08f3c740-0aae-4507-b4d3-0081d6553f38/views/fc1a7e2f-286b-40de-a208-1ec9a776e00e?directory_alias=avoc-dev-gamma-qs">
+                    <h2>GO-AI RTCM Dashboard (Prod)</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/e7573107-2186-4149-a5f1-be9239ec284a/views/339daffa-d03d-4769-95fb-97cbc2f7b8c4?directory_alias=amazonbi">
+                    <h2>Amazon Connect Andon Dashboard</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/d5f1c2da-6f9b-4d7f-b95c-fcaabfe8af5d/views/5950d9b5-02f5-4994-b3d6-cabd43a34e44?directory_alias=amazonbi">
+                    <h2>Nike Consolidated Dashboard</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://cw-dashboards.aka.amazon.com/cloudwatch/?accountId=696219362189&region=us-east-1#dashboards/dashboard/RTHM_Insights_Summary_Page">
+                    <h2>RTHM Insights Summary Page</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://datadayone.aka.amazon.com/t/AVOC/views/Compliance_Metrics_Consolidated_Dashboard/Associatelevel">
+                    <h2>Compliance Metrics Dashboard</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://datadayone.aka.amazon.com/t/AVOC/views/GO-AIAttendanceDashboard/Overview/bc928859-ddec-4997-b661-a523e08481c6/AtdTracking">
+                    <h2>Attendance Dispute Dashboard</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+
+            <div class="dashboard-card">
+                <a href="https://w.amazon.com/bin/view/Amazon_Robotics/Software/Workcell_Technology/AML/TRON/Dev/Dashboards">
+                    <h2>CW-Dashboards</h2>
+                    <span class="access-btn">Access Dashboard</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchDashboards() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName('dashboard-card');
+
+            for (let card of cards) {
+                const title = card.getElementsByTagName('h2')[0].innerText.toLowerCase();
+                if (title.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
